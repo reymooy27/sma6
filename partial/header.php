@@ -11,6 +11,9 @@
     $query = "SELECT * FROM user WHERE id='$id'";
     $result = $conn->query($query);
     $user = mysqli_fetch_assoc($result);
+  }else{
+    header('Location: login.php');
+    exit;
   }
   
 
@@ -38,13 +41,15 @@
         <img src="src/images/iconmonstr-x-mark-lined-240.png" alt="close" id='close'/>
         <a href="dashboard.php">Dashboard</a>
         <a href="kelas.php">Kelas</a>
+        <a href="guru.php">Guru</a>
+        <a href="mataPelajaran.php">Mata Pelajaran</a>
         <?php if(isset($_SESSION['user-id'])):?>
           <a href="controllers/logout.php">Log Out</a>
         <?php endif?>
       </div>
     </div>
     <div class="full-width wraper">
-      <div class="header">
+      <div class="header shadow-lg">
         <div>
           <img src='src/images/iconmonstr-menu-left-lined-240.png' alt='menu' id='menu'/>
         </div>

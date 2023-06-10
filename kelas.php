@@ -5,9 +5,9 @@
 
 
   $kelas = getKelas($conn);
-  $id_kelas = $_GET['id'] ?? $kelas[0][0];
+  $id_kelas = $_GET['id'] ?? 1;
 
-  $current_kelas;
+  $current_kelas = 'Kelas';
 
   foreach($kelas as $row){
     if($id_kelas == $row[0]){
@@ -31,7 +31,7 @@
     </div>
   <?php endif?>
   <div class="mb-3">
-    <h1><?= $current_kelas ? "Kelas " . $current_kelas[1] : "Kelas" ?></h1>
+    <h3><?= $current_kelas ? "Kelas " . $current_kelas[1] : "Kelas" ?></h3>
   </div>
 
   <div class="d-flex justify-content-between mb-3">
@@ -74,19 +74,19 @@
         </div>
         <div>
           <label for="nis" class="form-label">NIS</label>
-          <input type="text" placeholder="NIS" autofocus name="nis" required class="form-control">
+          <input type="text" placeholder="NIS" autofocus name="nis" class="form-control">
         </div>
         <div>
           <label for="tempat_lahir" class="form-label">Tempat Lahir</label>
-          <input type="text" placeholder="Tempat Lahir" autofocus name="tempat_lahir" required class="form-control">
+          <input type="text" placeholder="Tempat Lahir" autofocus name="tempat_lahir" class="form-control">
         </div>
         <div>
           <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
-          <input type="date" autofocus name="tanggal_lahir" required class="form-control">
+          <input type="date" autofocus name="tanggal_lahir" class="form-control">
         </div>
         <div>
           <label for="alamat" class="form-label">Alamat</label>
-          <input type="text" placeholder="Alamat" autofocus name="alamat" required class="form-control">
+          <input type="text" placeholder="Alamat" autofocus name="alamat" class="form-control">
         </div>
         <div>
           <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
@@ -109,27 +109,27 @@
         </div>
         <div>
           <label for="nama_ayah" class="form-label">Nama Ayah</label>
-          <input type="text" placeholder="Nama Ayah" autofocus name="nama_ayah" required class="form-control">
+          <input type="text" placeholder="Nama Ayah" autofocus name="nama_ayah" class="form-control">
         </div>
         <div>
           <label for="nama_ibu" class="form-label">Nama Ibu</label>
-          <input type="text" placeholder="Nama Ibu" autofocus name="nama_ibu" required class="form-control">
+          <input type="text" placeholder="Nama Ibu" autofocus name="nama_ibu" class="form-control">
         </div>
         <div>
           <label for="pekerjaan_ayah" class="form-label">Pekerjaan Ayah</label>
-          <input type="text" placeholder="Pekerjaan Ayah" autofocus name="pekerjaan_ayah" required class="form-control">
+          <input type="text" placeholder="Pekerjaan Ayah" autofocus name="pekerjaan_ayah" class="form-control">
         </div>
         <div>
           <label for="pekerjaan_ibu" class="form-label">Pekerjaan ibu</label>
-          <input type="text" placeholder="Pekerjaan Ibu" autofocus name="pekerjaan_ibu" required class="form-control">
+          <input type="text" placeholder="Pekerjaan Ibu" autofocus name="pekerjaan_ibu" class="form-control">
         </div>
         <div>
           <label for="thn_semester" class="form-label">Semester</label>
-          <input type="text" placeholder="Semester" autofocus name="thn_semester" required class="form-control">
+          <input type="text" placeholder="Semester" autofocus name="thn_semester" class="form-control">
         </div>
         <div>
           <label for="no_telp" class="form-label">No. Telepon</label>
-          <input type="text" placeholder="No. Telepon" autofocus name="no_telp" required class="form-control">
+          <input type="text" placeholder="No. Telepon" autofocus name="no_telp" class="form-control">
         </div>
       
         <button type="submit" name="submit" class="btn btn-success">Submit</button>
@@ -205,54 +205,57 @@
       <?php endforeach?>
     </select>
   </div>
-  <div class="bg-white shadow p-3 rounded table-responsive">
-    <table class="table table-hover table-sm display" id="datatable">
-      <thead>
-        <tr class="table-secondary text">
-          <th scope="col">No</th>
-          <th scope="col">NIS</th>
-          <th scope="col">Nama</th>
-          <th scope="col">Tempat/Tanggal Lahir</th>
-          <th scope="col">Jenis Kelamin</th>
-          <th scope="col">Agama</th>
-          <th scope="col">Alamat</th>
-          <th scope="col">Nama Ayah</th>
-          <th scope="col">Nama Ibu</th>
-          <th scope="col">Pekerjaan Ayah</th>
-          <th scope="col">Pekerjaan Ibu</th>
-          <th scope="col">Tahun/Semester</th>
-          <th scope="col">No. Telp</th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php foreach($data as $key=>$row):?>
-          <tr>
-            <td><?= $key + 1?></td>
-            <td><?= $row['nis']?></td>
-            <td><?= strtoupper($row['nama'])?></td>
-            <td><?= $row['tempat_lahir'].', ' . $row['tanggal_lahir']?></td>
-            <td><?= $row['jenis_kelamin']?></td>
-            <td><?= $row['agama']?></td>
-            <td><?= $row['alamat']?></td>
-            <td><?= $row['nama_ayah']?></td>
-            <td><?= $row['nama_ibu']?></td>
-            <td><?= $row['pekerjaan_ayah']?></td>
-            <td><?= $row['pekerjaan_ibu']?></td>
-            <td><?= $row['thn_semester']?></td>
-            <td><?= $row['no_telp']?></td>
-            <td class="d-flex gap-3">
-              <button type="button" id="btn-edit-siswa" class="btn btn-warning" data-id="<?= $row['id']?>" data-siswa='{"id":"<?=$row['id']?>","nama":"<?=$row['nama']?>","nis":"<?=$row['nis']?>","tempat_lahir":"<?=$row['tempat_lahir']?>","tanggal_lahir":"<?=$row['tanggal_lahir']?>","jenis_kelamin":"<?=$row['jenis_kelamin']?>","agama":"<?=$row['agama']?>","alamat":"<?=$row['alamat']?>","nama_ayah":"<?=$row['nama_ayah']?>","nama_ibu":"<?=$row['nama_ibu']?>","pekerjaan_ayah":"<?=$row['pekerjaan_ayah']?>","pekerjaan_ibu":"<?=$row['pekerjaan_ibu']?>","thn_semester":"<?=$row['thn_semester']?>","no_telp":"<?=$row['no_telp']?>"}' data-bs-toggle="modal" data-bs-target="#editSiswa">
-                <img src="src/images/edit.svg" alt="">
-              </button>
-              <button type="button" id="btn-hapus-siswa" class="btn btn-danger" data-id="<?= $row['id']?>" data-bs-toggle="modal" data-bs-target="#hapusSiswa">
-                <img src="src/images/trash.svg" alt="">
-              </button>
-            </td>
+  <div class="bg-white shadow p-3 rounded">
+    <h4 class="my-2">Daftar Siswa</h4>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover table-sm display" id="datatable">
+        <thead>
+          <tr class="table-secondary">
+            <th scope="col" class="text-center">No</th>
+            <th scope="col" class="text-center">NIS</th>
+            <th scope="col" class="text-center">Nama</th>
+            <th scope="col" class="text-center">Tempat/Tanggal Lahir</th>
+            <th scope="col" class="text-center">Jenis Kelamin</th>
+            <th scope="col" class="text-center">Agama</th>
+            <th scope="col" class="text-center">Alamat</th>
+            <th scope="col" class="text-center">Nama Ayah</th>
+            <th scope="col" class="text-center">Nama Ibu</th>
+            <th scope="col" class="text-center">Pekerjaan Ayah</th>
+            <th scope="col" class="text-center">Pekerjaan Ibu</th>
+            <th scope="col" class="text-center">Tahun/Semester</th>
+            <th scope="col" class="text-center">No. Telp</th>
+            <th scope="col" class="text-center">Action</th>
           </tr>
-          <?php endforeach?>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <?php foreach($data as $key=>$row):?>
+            <tr>
+              <td><?= $key + 1?></td>
+              <td><?= $row['nis']?></td>
+              <td><?= strtoupper($row['nama'])?></td>
+              <td><?= $row['tempat_lahir'].', ' . $row['tanggal_lahir']?></td>
+              <td><?= $row['jenis_kelamin']?></td>
+              <td><?= $row['agama']?></td>
+              <td><?= $row['alamat']?></td>
+              <td><?= $row['nama_ayah']?></td>
+              <td><?= $row['nama_ibu']?></td>
+              <td><?= $row['pekerjaan_ayah']?></td>
+              <td><?= $row['pekerjaan_ibu']?></td>
+              <td><?= $row['thn_semester']?></td>
+              <td><?= $row['no_telp']?></td>
+              <td class="d-flex gap-3">
+                <button type="button" id="btn-edit-siswa" class="btn btn-warning" data-id="<?= $row['id']?>" data-siswa='{"id":"<?=$row['id']?>","nama":"<?=$row['nama']?>","nis":"<?=$row['nis']?>","tempat_lahir":"<?=$row['tempat_lahir']?>","tanggal_lahir":"<?=$row['tanggal_lahir']?>","jenis_kelamin":"<?=$row['jenis_kelamin']?>","agama":"<?=$row['agama']?>","alamat":"<?=$row['alamat']?>","nama_ayah":"<?=$row['nama_ayah']?>","nama_ibu":"<?=$row['nama_ibu']?>","pekerjaan_ayah":"<?=$row['pekerjaan_ayah']?>","pekerjaan_ibu":"<?=$row['pekerjaan_ibu']?>","thn_semester":"<?=$row['thn_semester']?>","no_telp":"<?=$row['no_telp']?>"}' data-bs-toggle="modal" data-bs-target="#editSiswa">
+                  <img src="src/images/edit.svg" alt="">
+                </button>
+                <button type="button" id="btn-hapus-siswa" class="btn btn-danger" data-id="<?= $row['id']?>" data-bs-toggle="modal" data-bs-target="#hapusSiswa">
+                  <img src="src/images/trash.svg" alt="">
+                </button>
+              </td>
+            </tr>
+            <?php endforeach?>
+        </tbody>
+      </table>
+    </div>
 
     <div class="modal fade" id="editSiswa" tabindex="-1" aria-labelledby="editSiswaLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -269,19 +272,19 @@
             </div>
             <div>
               <label for="nis" class="form-label">NIS</label>
-              <input type="text" placeholder="NIS" autofocus name="nis" required class="form-control">
+              <input type="text" placeholder="NIS" autofocus name="nis" class="form-control">
             </div>
             <div>
               <label for="tempat_lahir" class="form-label">Tempat Lahir</label>
-              <input type="text" placeholder="Tempat Lahir" autofocus name="tempat_lahir" required class="form-control">
+              <input type="text" placeholder="Tempat Lahir" autofocus name="tempat_lahir" class="form-control">
             </div>
             <div>
               <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
-              <input type="date" autofocus name="tanggal_lahir" required class="form-control">
+              <input type="date" autofocus name="tanggal_lahir" class="form-control">
             </div>
             <div>
               <label for="alamat" class="form-label">Alamat</label>
-              <input type="text" placeholder="Alamat" autofocus name="alamat" required class="form-control">
+              <input type="text" placeholder="Alamat" autofocus name="alamat" class="form-control">
             </div>
             <div>
               <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
@@ -304,27 +307,27 @@
             </div>
             <div>
               <label for="nama_ayah" class="form-label">Nama Ayah</label>
-              <input type="text" placeholder="Nama Ayah" autofocus name="nama_ayah" required class="form-control">
+              <input type="text" placeholder="Nama Ayah" autofocus name="nama_ayah" class="form-control">
             </div>
             <div>
               <label for="nama_ibu" class="form-label">Nama Ibu</label>
-              <input type="text" placeholder="Nama Ibu" autofocus name="nama_ibu" required class="form-control">
+              <input type="text" placeholder="Nama Ibu" autofocus name="nama_ibu" class="form-control">
             </div>
             <div>
               <label for="pekerjaan_ayah" class="form-label">Pekerjaan Ayah</label>
-              <input type="text" placeholder="Pekerjaan Ayah" autofocus name="pekerjaan_ayah" required class="form-control">
+              <input type="text" placeholder="Pekerjaan Ayah" autofocus name="pekerjaan_ayah" class="form-control">
             </div>
             <div>
               <label for="pekerjaan_ibu" class="form-label">Pekerjaan ibu</label>
-              <input type="text" placeholder="Pekerjaan Ibu" autofocus name="pekerjaan_ibu" required class="form-control">
+              <input type="text" placeholder="Pekerjaan Ibu" autofocus name="pekerjaan_ibu" class="form-control">
             </div>
             <div>
               <label for="thn_semester" class="form-label">Semester</label>
-              <input type="text" placeholder="Semester" autofocus name="thn_semester" required class="form-control">
+              <input type="text" placeholder="Semester" autofocus name="thn_semester" class="form-control">
             </div>
             <div>
               <label for="no_telp" class="form-label">No. Telepon</label>
-              <input type="text" placeholder="No. Telepon" autofocus name="no_telp" required class="form-control">
+              <input type="text" placeholder="No. Telepon" autofocus name="no_telp" class="form-control">
             </div>
             <button type="submit" name="submit" class="btn btn-warning">Submit</button>
           </form>
