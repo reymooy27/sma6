@@ -12,7 +12,8 @@
     $alamat = $_POST['alamat'];
     $jabatan = $_POST['jabatan'];
     $no_telp = $_POST['no_telp'];
-    $sql = "INSERT INTO guru (nama_guru,tempat_lahir,tanggal_lahir,jenis_kelamin,agama,alamat,jabatan,no_telp) VALUES('$nama_guru','$tempat_lahir','$tanggal_lahir','$jenis_kelamin','$agama','$alamat','$jabatan','$no_telp')";
+    $id_mapel = $_POST['mapel'];
+    $sql = "INSERT INTO guru (nama_guru,tempat_lahir,tanggal_lahir,jenis_kelamin,agama,alamat,jabatan,no_telp,id_mapel) VALUES('$nama_guru','$tempat_lahir','$tanggal_lahir','$jenis_kelamin','$agama','$alamat','$jabatan','$no_telp','$id_mapel')";
     $result = $conn->query($sql);
     if($result){
       header("Location: ../guru.php");

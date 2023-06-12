@@ -4,14 +4,20 @@
   $conn = OpenCon();
 
 
-  $sql = "SELECT * FROM guru";
+  $sql = "SELECT * FROM guru JOIN mapel ON mapel.id_mapel = guru.id_mapel";
   $result = $conn->query($sql);
   $data = array(); // initialize an empty array to store the rows
   while ($row = $result->fetch_assoc()) {
       $data[] = $row; // append each row to the data array
   }
+
+  $sqlMapel = "SELECT * FROM mapel";
+  $resultMapel = $conn->query($sqlMapel);
+  $mapel = $resultMapel->fetch_all(); 
+
+
   $conn->close();
-  // echo json_encode($data);
+  echo json_encode($data);
 
 ?>
   <?php if(isset($_SESSION['error'])):?>
@@ -45,6 +51,15 @@
         <div>
           <label for="nama_guru" class="form-label">Nama Guru</label>
           <input type="text" placeholder="Nama Guru" autofocus name="nama_guru" required class="form-control">
+        </div>
+        <div>
+          <label for="mapel" class="form-label">Mata Pelajaran</label>
+          <select name="mapel" id="" class="form-select">
+            <option selected value="Pilih Mata Pelajaran">Pilih Mata Pelajaran</option>
+            <?php foreach($mapel as $row):?>
+            <option value="<?=$row[0]?>"><?=$row[1]?></option>
+            <?php endforeach?>
+          </select>
         </div>
         <div>
           <label for="tempat_lahir" class="form-label">Tempat Lahir</label>
@@ -99,6 +114,7 @@
         <tr class="table-secondary">
           <th scope="col" class="text-center">No</th>
           <th scope="col" class="text-center">Nama</th>
+          <th scope="col" class="text-center">Mata Pelajaran</th>
           <th scope="col" class="text-center">Tempat/Tanggal Lahir</th>
           <th scope="col" class="text-center">Jenis Kelamin</th>
           <th scope="col" class="text-center">Agama</th>
@@ -113,6 +129,7 @@
           <tr>
             <td><?= $key + 1?></td>
             <td><?= strtoupper($row['nama_guru'])?></td>
+            <td><?= $row['nama_mapel']?></td>
             <td><?= $row['tempat_lahir'].', ' . $row['tanggal_lahir']?></td>
             <td><?= $row['jenis_kelamin']?></td>
             <td><?= $row['agama']?></td>
@@ -144,6 +161,15 @@
             <div>
               <label for="nama_guru" class="form-label">Nama Guru</label>
               <input type="text" placeholder="Nama Guru" autofocus name="nama_guru" required class="form-control">
+            </div>
+            <div>
+              <label for="mapel" class="form-label">Mata Pelajaran</label>
+              <select name="mapel" id="" class="form-select">
+                <option selected value="Pilih Mata Pelajaran">Pilih Mata Pelajaran</option>
+                <?php foreach($mapel as $row):?>
+                <option value="<?=$row[0]?>"><?=$row[1]?></option>
+                <?php endforeach?>
+              </select>
             </div>
             <div>
               <label for="tempat_lahir" class="form-label">Tempat Lahir</label>
